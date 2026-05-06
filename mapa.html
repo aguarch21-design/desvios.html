@@ -23,7 +23,41 @@
 </div>
 
 <div class="controls">
-    <select id="lineaSelect" onchange="actualizarMapa()">
+    <const ubicaciones onchange="actualizarMapa()">
+const ubicaciones = {
+    "pza_espana": {
+        t: "Terminal Pza. España Provisoria",
+        d: "Líneas 100, 102, 103, 105, 109, 110, 113, 137, 142, 144, 409. Ubicación: Canelones entre Ferreira Aldunate y G. Araújo.",
+        lat: "-34.9082", lon: "-56.1965", zoom: "18"
+    },
+    "ciud_norte": {
+        t: "Terminal Ciudadela Norte / Río Branco",
+        d: "Líneas 124, 125, 127, 130, 147, 148, 156, 158, 169, 175, 402, 505, 524, 538. Ubicación: Uruguay entre Yi y Rondeau.",
+        lat: "-34.9026", lon: "-56.1916", zoom: "18"
+    },
+    "palacio": {
+        t: "Corte Palacio Legislativo",
+        d: "Circulación por anillo exterior a contramano. Todas las líneas que cruzan por Av. Leyes.",
+        lat: "-34.8911", lon: "-56.1872", zoom: "17"
+    },
+    "kibon": {
+        t: "Terminal Kibón (Provisoria)",
+        d: "Líneas 62, 116, 128, 149, 163, 185, 522. Ubicación: Rambla Armenia entre L.A. de Herrera y A. Costa.",
+        lat: "-34.9056", lon: "-56.1364", zoom: "18"
+    },
+    "marne": {
+        t: "Cruce Marne",
+        d: "Cruce de línea 2 y otras por B. y Ordoñez. Posibles demoras por pasaje de corredores.",
+        lat: "-34.8695", lon: "-56.1558", zoom: "17"
+    }
+};
+        <option value="">-- Seleccionar Terminal o Punto --</option>
+<option value="pza_espana">Terminal Pza. España (Canelones y Araújo) - 05:00hs</option>
+<option value="ciud_norte">Terminal Ciudadela Norte (Uruguay y Rondeau) - 06:30hs</option>
+<option value="kibon">Terminal Kibón (Rambla y L.A. de Herrera) - 05:00hs</option>
+<option value="palacio">Palacio Legislativo (Anillo Exterior / Contramano)</option>
+<option value="trespuntos">Cruce Br. Artigas y Suarez (Corte Parcial)</option>
+<option value="marne">Cruce Marne y B. y Ordoñez (Líneas 2, 144, 145)</option>
         <option value="">-- Seleccionar Línea o Zona --</option>
         <optgroup label="Terminales Provisorias">
             <option value="pza_espana">Pza. España (Canelones y Araújo)</option>
