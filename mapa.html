@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Desvíos - Maratón MVD</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; margin: 0; padding: 0; background: #f0f2f5; display: flex; flex-direction: column; height: 100vh; }
+        .header { background: #004a99; color: white; padding: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .controls { padding: 15px; background: white; z-index: 10; }
+        select { width: 100%; padding: 12px; font-size: 16px; border: 2px solid #004a99; border-radius: 8px; }
+        #map-container { flex-grow: 1; position: relative; border-top: 2px solid #ccc; }
+        iframe { width: 100%; height: 100%; border: none; }
+        .info-panel { position: absolute; bottom: 20px; left: 10px; right: 10px; background: rgba(255,255,255,0.95); padding: 15px; border-radius: 10px; display: none; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); border-left: 6px solid #004a99; }
+        h2 { margin: 0 0 5px 0; font-size: 1.1em; color: #004a99; }
+        p { margin: 0; font-size: 0.95em; line-height: 1.4; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <strong>Maratón Montevideo 2026 - Movilidad</strong>
+</div>
+
+<div class="controls">
+    <select id="lineaSelect" onchange="actualizarMapa()">
+        <option value="">-- Seleccionar Línea o Zona --</option>
+        <optgroup label="Terminales Provisorias">
+            <option value="pza_espana">Pza. España (Canelones y Araújo)</option>
+            <option value="ciud_norte">Ciudadela Norte (Uruguay y Rondeau)</option>
+            <option value="kibon">Kibón (Rbla. y L.A. de Herrera)</option>
+        </optgroup>
+        <optgroup label="Puntos Críticos">
+            <option value="palacio">Palacio Legislativo (Anillo Exterior)</option>
+            <option value="trespuntos">Cruce Br. Artigas y Suarez</option>
+        </optgroup>
+        <optgroup label="Líneas (Ejemplos)">
+            <option value="124">Línea 124, 125, 130</option>
+            <option value="103">Líneas 100, 102, 103, 110</option>
+            <option value="522">Línea 522 / 149</option>
+        </optgroup>
+    </select>
+</div>
+
+<div id="map-container">
+    <!-- Mapa por defecto centrado en Montevideo -->
+    <iframe id="gmap" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d26195.42233342371!2d-56.175!3d-34.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2suy!4v1714500000000"></iframe>
+    
+    <div id="infoPanel" class="info-panel">
+        <h2 id="infoTitulo"></h2>
+        <p id="infoTexto"></p>
+    </div>
+</div>
+
+<script>
+const ubicaciones = {
+    "pza_espana": {
+        t: "Terminal Pza. España Provisoria",
+        d: "Ubicada en Canelones entre Ferreira Aldunate y G. Araújo desde las 05:00.",
+        lat: "-34.9081", lon: "-56.1963", zoom: "17"
+    },
+    "ciud_norte": {
+        t: "Terminal Ciudadela Norte / Río Branco",
+        d: "Trasladada a Uruguay entre Yi y Rondeau desde las 06:30.",
+        lat: "-34.9025", lon: "-56.1915", zoom: "17"
+    },
+    "palacio": {
+        t: "Palacio Legislativo",
+        d: "Circulación por anillo exterior a contramano. Prohibido giro a Av. Libertador hasta las 09:00.",
+        lat: "-34.8911", lon: "-56.1872", zoom: "16"
+    },
+    "kibon": {
+        t: "Zona Kibón",
+        d: "Terminal en Rbla. Armenia entre L.A. de Herrera y A. Costa desde las 05:00.",
+        lat: "-34.9056", lon: "-56.1364", zoom: "17"
+    },
+    "124": {
+        t: "Líneas 124, 125, 130, 137",
+        d: "Hacia afuera: Mercedes - Ejido - Av. Leyes - Yatay - San Martín. Terminal en Ciudadela Norte.",
+        lat: "-34.8985", lon: "-56.1900", zoom: "15"
+    },
+    "103": {
+        t: "Corredor 8 de Octubre",
+        d: "Desvío por Sanguinetti y túnel de Av. Italia para entrar al Centro por Colonia.",
+        lat: "-34.8935", lon: "-56.1550", zoom: "15"
+    }
+};
+
+function actualizarMapa() {
+    const val = document.getElementById("lineaSelect").value;
+    const panel = document.getElementById("infoPanel");
+    const iframe = document.getElementById("gmap");
+
+    if (val && ubicaciones[val]) {
+        const loc = ubicaciones[val];
+        // Actualizamos el iframe de Google Maps con las coordenadas
+        iframe.src = `https://www.google.com/maps?q=${loc.lat},${loc.lon}&z=${loc.zoom}&output=embed`;
+        
+        // Actualizamos el panel de información
+        document.getElementById("infoTitulo").innerText = loc.t;
+        document.getElementById("infoTexto").innerText = loc.d;
+        panel.style.display = "block";
+    } else {
+        panel.style.display = "none";
+    }
+}
+</script>
+</body>
+</html>
