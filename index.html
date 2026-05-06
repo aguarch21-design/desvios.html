@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desvíos Maratón MVD 2026</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; padding: 15px; background: #f0f2f5; }
+        .card { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: #004a99; font-size: 1.3em; text-align: center; }
+        .meta { font-size: 0.8em; color: #777; text-align: center; margin-bottom: 15px; }
+        select { width: 100%; padding: 15px; font-size: 16px; border: 2px solid #004a99; border-radius: 8px; margin-bottom: 20px; }
+        .info { display: none; padding: 15px; border-radius: 8px; background: #eef6ff; line-height: 1.5; border-left: 5px solid #004a99; }
+        .alerta { color: #856404; background: #fff3cd; padding: 10px; border-radius: 5px; margin-bottom: 10px; font-weight: bold; font-size: 0.9em; }
+        b { color: #004a99; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Desvíos Maratón 10/05</h1>
+    <div class="meta">Referencia: 42k Maratón de Montevideo 10.5.2026.pdf</div>
+
+    <select id="lineaSelect" onchange="mostrar()">
+        <option value="">-- Seleccionar Línea --</option>
+        <optgroup label="Líneas 2 al 79">
+            <option value="2">Línea 2</option>
+            <option value="17">Línea 17</option>
+            <option value="21">Línea 21</option>
+            <option value="60">Línea 60</option>
+            <option value="62">Línea 62</option>
+            <option value="64">Línea 64</option>
+            <option value="71">Línea 71</option>
+            <option value="76">Línea 76</option>
+            <option value="79">Línea 79</option>
+        </optgroup>
+        <optgroup label="Líneas 100">
+            <option value="100">Línea 100</option>
+            <option value="102">Línea 102</option>
+            <option value="103">Línea 103</option>
+            <option value="104">Línea 104</option>
+            <option value="105">Línea 105</option>
+            <option value="109">Línea 109</option>
+            <option value="110">Línea 110</option>
+            <option value="111">Línea 111</option>
+            <option value="113">Línea 113</option>
+            <option value="115">Línea 115</option>
+            <option value="116">Línea 116</option>
+            <option value="117">Línea 117</option>
+            <option value="121">Línea 121</option>
+        </optgroup>
+        <optgroup label="Líneas 124 al 199">
+            <option value="124">Línea 124</option>
+            <option value="125">Línea 125</option>
+            <option value="127">Línea 127</option>
+            <option value="128">Línea 128</option>
+            <option value="130">Línea 130</option>
+            <option value="137">Línea 137</option>
+            <option value="142">Línea 142</option>
+            <option value="143">Línea 143</option>
+            <option value="144">Línea 144</option>
+            <option value="145">Línea 145</option>
+            <option value="147">Línea 147</option>
+            <option value="148">Línea 148</option>
+            <option value="149">Línea 149</option>
+            <option value="150">Línea 150</option>
+            <option value="151">Línea 151</option>
+            <option value="156">Línea 156</option>
+            <option value="157">Línea 157</option>
+            <option value="158">Línea 158</option>
+            <option value="163">Línea 163</option>
+            <option value="169">Línea 169</option>
+            <option value="174">Línea 174</option>
+            <option value="175">Línea 175</option>
+            <option value="180">Línea 180</option>
+            <option value="181">Línea 181</option>
+            <option value="183">Línea 183</option>
+            <option value="185">Línea 185</option>
+            <option value="187">Línea 187</option>
+            <option value="188">Línea 188</option>
+            <option value="191">Línea 191</option>
+            <option value="192">Línea 192</option>
+            <option value="199">Línea 199</option>
+        </optgroup>
+        <optgroup label="Líneas 300 - 582 y G">
+            <option value="300">Línea 300</option>
+            <option value="306">Línea 306</option>
+            <option value="316">Línea 316</option>
+            <option value="328">Línea 328</option>
+            <option value="329">Línea 329</option>
+            <option value="330">Línea 330</option>
+            <option value="370">Línea 370</option>
+            <option value="396">Línea 396</option>
+            <option value="402">Línea 402</option>
+            <option value="404">Línea 404</option>
+            <option value="405">Línea 405</option>
+            <option value="407">Línea 407</option>
+            <option value="409">Línea 409</option>
+            <option value="427">Línea 427</option>
+            <option value="456">Línea 456</option>
+            <option value="494">Línea 494</option>
+            <option value="G">Línea G</option>
+            <option value="505">Línea 505</option>
+            <option value="522">Línea 522</option>
+            <option value="524">Línea 524</option>
+            <option value="526">Línea 526</option>
+            <option value="538">Línea 538</option>
+            <option value="546">Línea 546</option>
+            <option value="582">Línea 582</option>
+            <option value="CE1">Línea CE1</option>
+        </optgroup>
+        <optgroup label="Suburbanas e Inter">
+            <option value="sub_agraciada">Suburbanas por Agraciada</option>
+            <option value="sub_flores">Suburbanas por Gral. Flores</option>
+            <option value="sub_italia">Suburbanas por Av. Italia</option>
+            <option value="sub_ruta8">Suburbanas por Ruta 8</option>
+            <option value="inter_trescruces">Inter (Tres Cruces)</option>
+        </optgroup>
+    </select>
+
+    <div id="resultado" class="info">
+        <div id="alerta" class="alerta"></div>
+        <div id="detalle"></div>
+    </div>
+</div>
+
+<script>
+const data = {
+    "2": { a: "Cruce en Marne", d: "Portones: B. y Ordoñez-Marne-Cabrera-Comercio. Saint Bois: 8 Octubre-B. y Ordoñez a ruta." },
+    "17": { a: "Desvío Centro", d: "Pta. Carretas: Agraciada-Maturana-Br. Artigas-Millán-San Martín-I. de María-Gral Flores-Av. Leyes. Casabó: Fdez. Crespo-Av. Leyes-Yatay-San Martín-Millán-Zapicán-Br. Artigas-Agraciada." },
+    "21": { a: "Uso de Túnel", d: "Pza. Independencia: Túnel Av. Italia-18 Julio-Tacuarembó-Colonia-Soriano-G. Araújo-San José-Maldonado-Constituyente-18 Julio a ruta." },
+    "60": { a: "Demora en Rivera y L.A. de Herrera", d: "C. Vieja: Rivera-Guayabos-M. Trueba-Soriano-G. Araújo-San José-Maldonado-Constituyente-18 Julio." },
+    "62": { a: "Salida Tnal. Prov. Kibón", d: "Pza. Indep: Rivera-Guayabos-M. Trueba-Soriano-G. Araújo-San José-Maldonado-Minas-18 Julio." },
+    "64": { a: "Túnel Av. Italia", d: "Recorrido habitual, única afectación: Ingreso a túnel de Av. Italia." },
+    "71": { a: "Desvío por Larrañaga", d: "Mendoza: Túnel Av. Italia-L.A. de Herrera. Pocitos: Larrañaga-Serrato-Avellaneda-B. y Ordoñez-Av. Italia-Br. Artigas." },
+    "76": { a: "Cruce Br. Artigas y Suarez", d: "Cerro: Soca-Ricaldoni-Albo-Garibaldi. Pta. Carretas: Garibaldi-Albo-Ricaldoni-Soca." },
+    "79": { a: "Desvío en B. y Ordoñez", d: "Belloni: Canstatt-B. y Ordoñez-J.P. Varela-I. Goyena. Fdez. Crespo: I. Goyena-J.P. Varela-Madreselva-Arrieta." },
+    "100": { a: "Tnal. Prov. Pza. España (Canelones)", d: "Pza. España: 8 Octubre-Sanguinetti-Joanicó-B. y Ordoñez-Túnel-Br. Artigas-Colonia-Soriano-J.H. y Obes-Canelones. Villa Farre: San José-Maldonado-Constituyente-18 Julio-Túnel-L.A. de Herrera-8 Octubre." },
+    "102": { a: "Tnal. Prov. Pza. España", d: "Centro: 8 Octubre-Sanguinetti-Joanicó-B. y Ordoñez-Túnel-Br. Artigas-Colonia-Soriano-G. Araujo-San José. Afuera: 18 Julio-Túnel-L.A. de Herrera-8 Octubre." },
+    "103": { a: "Tnal. Prov. Pza. España", d: "Pza. España: Igual que línea 100. Villa García: Igual que línea 100." },
+    "104": { a: "Desvío Buceo", d: "Pza. Indep: Jackson-Guayabos-Soriano-G. Araujo-San José-Maldonado-Constituyente-18 Julio. Afuera: 26 de Marzo-L.A. de Herrera-Rivera-Arrascaeta-Verdi-Almería." },
+    "105": { a: "Tnal. Prov. Pza. España", d: "Igual que línea 100." },
+    "109": { a: "Tnal. Prov. Pza. España", d: "Igual que línea 100." },
+    "110": { a: "Tnal. Prov. Pza. España", d: "Igual que línea 100." },
+    "111": { a: "Retorno en 18 y Paullier", d: "Hacia 18: 8 Oct-Sanguinetti-Joanicó-B. y Ordoñez-Túnel-Br. Artigas-Colonia-Paullier. Afuera: 18 Julio-Túnel-L.A. de Herrera-8 Octubre." },
+    "113": { a: "Tnal. Prov. Pza. España", d: "Pza. España: 8 Oct-Sanguinetti-Joanicó-B. y Ordoñez-Av. Italia-Colonia-Soriano-Canelones. Playa Malvín: San José-Constituyente-18 Julio-Túnel-L.A. de Herrera-8 Octubre." },
+    "115": { a: "Desvío Comercio", d: "L.A. de Herrera: 8 Oct-Gdor. Viana-Joanicó-Comercio-Asilo-B. y Ordoñez-8 Octubre." },
+    "116": { a: "Tnal. Prov. Kibón", d: "C. Vieja: Rbla Armenia-L.A. de Herrera-Canelones-Soriano-G. Araújo-San José. Pocitos: San José-Maldonado-Constituyente-26 Marzo-Rbla Armenia." },
+    "117": { a: "Cruce Soriano", d: "Pza. Indep: Jackson-Guayabos-M. Trueba-Soriano-G. Araújo-San José-Maldonado-Constituyente-18 Julio." },
+    "121": { a: "Recorrido en Ciudad Vieja", d: "Colonia-Rondeau-Mercedes-Vazquez-18 de Julio." },
+    "124": { a: "Tnal. Prov. Ciudadela Norte", d: "C. Vieja: Br. Artigas-Millán-San Martín-Av. Leyes-Magallanes-Uruguay-Cuareim. Sta. Catalina: Mercedes-Ejido-Hno. Damasceno-Av. Leyes-Yatay-San Martín-Burgues-Br. Artigas." },
+    "125": { a: "Tnal. Prov. Ciudadela Norte", d: "C. Vieja: Agraciada-Maturana-Br. Artigas-Millán-San Martín-Av. Leyes-Uruguay-Cuareim. Cerro: Mercedes-Ejido-Av. Leyes-San Martín-Burgues-Br. Artigas-Agraciada." },
+    "127": { a: "Tnal. Prov. Ciudadela Norte", d: "Igual que línea 125." },
+    "128": { a: "Tnal. Prov. Kibón", d: "Pocitos: Agraciada-Maturana-Br. Artigas-Millán-San Martín-Av. Leyes-Magallanes-26 Marzo-Rbla Armenia. P. Arena: Rbla Armenia-L.A. de Herrera-F. Crespo-Av. Leyes-Yatay-San Martín-Burgues-Br. Artigas-Agraciada." },
+    "130": { a: "Tnal. Prov. Ciudadela Norte", d: "C. Vieja: Agraciada-Maturana-Br. Artigas-Millán-San Martín-Av. Leyes-Uruguay-Cuareim. La Paz: Mercedes-Ejido-Av. Leyes-Yatay-San Martín-Burgues-Br. Artigas-Agraciada." },
+    "137": { a: "Tnal. Prov. Pza. España", d: "Pza. España: Agraciada-Maturana-Br. Artigas-Millán-San Martín-Av. Leyes-Paraguay-Canelones. P. Arena: Canelones-Convención-Maldonado-Av. Leyes-Yatay-San Martín-Burgues-Br. Artigas-Agraciada." },
+    "142": { a: "Tnal. Prov. Pza. España", d: "Pza. España: Rivera-Guayabos-M. Trueba-Soriano-Canelones. Costanera: G. Araújo-San José-Maldonado-Constituyente." },
+    "143": { a: "Tnal. Prov. Ciudadela Norte", d: "Ciudadela: R. Anador-Las Heras-Túnel-Colonia-Rondeau. Buceo: Paysandú-Cuareim-Mercedes-Av. Italia-L.A. de Herrera-R. Anador." },
+    "144": { a: "Tnal. Prov. Pza. España", d: "Pza. España: Rivera-Guayabos-Soriano-Canelones. Cem. Norte: G. Araújo-San José-Maldonado-Constituyente." },
+    "145": { a: "Tnal. Prov. Pza. España", d: "Pza. España: R. Anador-Rivera-M. Bruto-26 Marzo-Canelones. Comp. América: Afectación 26 Marzo y L.A. de Herrera." },
+    "147": { a: "Tnal. Prov. Ciudadela Norte", d: "C. Vieja: Pena-Castro-Millán-San Martín-Av. Leyes-Magallanes-Uruguay. Afuera: Rondeau-Paysandú-Millán-Cno. Castro." },
+    "148": { a: "Tnal. Prov. Ciudadela Norte", d: "Ciudadela: Millán-San Martín-Av. Leyes-Magallanes-Uruguay. Aviación: Rondeau-Paysandú a ruta." },
+    "149": { a: "Tnal. Prov. Kibón", d: "Pocitos: Millán-San Martín-Av. Leyes-Magallanes-Mercedes-Soriano-A. Lanza-26 Marzo-Rbla Armenia. Mendoza: Rbla Armenia-L.A. de Herrera-Ejido-Maldonado-Constituyente-Colonia-Ejido-Millán." },
+    "150": { a: "Tnal. Prov. Ciudadela Norte", d: "Ciudadela: Burgues-San Martín-Av. Leyes-Magallanes-Uruguay. La Pilarica: Cuareim-Mercedes a ruta." },
+    "151": { a: "Afectación San Martín", d: "Portones: Millán-San Martín-Av. Leyes-Magallanes-Yaguarón-Mercedes. Verdisol: Colonia-Ejido-Yaguarón-Av. Leyes." },
+    "156": { a: "Tnal. Prov. Cuareim", d: "Aduana: San Martín-Av. Leyes-Cuareim. Hipódromo: Cuareim-Mercedes a ruta." },
+    "157": { a: "Afectación Millán", d: "Parque Rodó / P. Arena: Afectación y demora en Millán esq. L.A. de Herrera." },
+    "158": { a: "Tnal. Prov. Cuareim", d: "Aduana: San Martín-Av. Leyes-Cuareim. Gruta: Cuareim-Mercedes a ruta." },
+    "163": { a: "Tnal. Prov. Kibón", d: "Pocitos: Capurro-Agraciada-Br. Artigas-Millán-C. Arenal-San Martín-Vilardebó-26 Marzo-Rbla Armenia. P. Arena: Vilardebó-Millán-Zapicán-Br. Artigas-Agraciada." },
+    "169": { a: "Tnal. Prov. Ciudadela Norte", d: "Ciudadela: Gral. Flores-Av. Leyes-Magallanes-Uruguay-Cuareim. Manga: Mercedes-Ejido-Av. Leyes-Gral. Flores." },
+    "174": { a: "Uso de Túnel", d: "Pta. Carretas: Serrato-El Cairo-Larrañaga-Sanguinetti-B. y Ordoñez-Túnel a ruta." },
+    "175": { a: "Tnal. Prov. Ciudadela Norte", d: "Ciudadela: Gral. Flores-Av. Leyes-Magallanes-Colonia-Rondeau. Las Piedras: Cuareim-Mercedes a ruta." },
+    "180": { a: "Desvío por Larrañaga", d: "C. Vieja: Serrato-Larrañaga-Varela-Br. Artigas-18 Julio-Soriano-San José. Afuera: 18 Julio-Varela-Larrañaga-Robinson." },
+    "181": { a: "Desvío Garibaldi/Albo", d: "Pocitos: Br. Artigas-L.A. de Herrera-Urquiza-Garibaldi-Albo-Ricaldoni-Llambí-M. Barreiro-Rbla. Paso Molino: Br. Artigas-Millán-Castro." },
+    "183": { a: "Desvío Br. Artigas", d: "Pocitos: Castro-Millán-Zapicán-Br. Artigas. Paso Molino: L.A. de Herrera-Br. Artigas-Millán-Castro." },
+    "185": { a: "Tnal. Prov. Kibón", d: "Pocitos: Br. Artigas-Garibaldi-Albo-Ricaldoni-Llambí-M. Barreiro-26 Marzo-Rbla Armenia. Casabó: L.A. de Herrera-Lasplaces-Av. Italia-Centenario-Br. Artigas-Millán-Castro." },
+    "187": { a: "Tnal. Prov. Palacio Luz", d: "C. Vieja: Martín García-Gral. Flores-18 Julio-Soriano-San José. P. Luz: Gral. Flores-I. de María-Arequita-Aguilar." },
+    "188": { a: "Tnal. Prov. Palacio Luz", d: "Igual que línea 187." },
+    "191": { a: "Tnal. Prov. Palacio Luz", d: "Pta. Carretas: Tnal Prov-Albo-Ricaldoni-Llambí-M. Barreiro-26 Marzo. P. Luz: 26 Marzo-L.A. de Herrera-Lasplaces-R. Anador-Túnel-Albo-Garibaldi-Aguilar." },
+    "192": { a: "Uso de Túnel", d: "Pque Rodó: Larrañaga-Serrato-Avellaneda-B. y Ordoñez-Túnel-Ricaldoni. Manga: Soca-Ricaldoni-Túnel-Escuder Núñez-Centenario." },
+    "199": { a: "Cruce L.A. de Herrera", d: "Afectación y demora en el cruce con Luis A. de Herrera." },
+    "300": { a: "Uso de Túnel", d: "Pza. Zitarrosa / Instrucciones: 8 Octubre-Sanguinetti-B. y Ordoñez-Túnel a ruta." },
+    "306": { a: "Desvío B. y Ordoñez", d: "Geant: Castro-Millán-A. Zubiría-B. y Ordoñez-Gral Flores. Casabó: Gral Flores-B. y Ordoñez-Gral Acha-Millán-Castro." },
+    "316": { a: "Uso de Túnel", d: "Pocitos: 8 Oct-Sanguinetti-B. y Ordoñez-Túnel-Ricaldoni. Cno. Maldonado: Soca-Ricaldoni-Av. Italia-L.A. de Herrera." },
+    "328": { a: "Uso de Túnel", d: "Pta. Carretas: Serrato-Larrañaga-Avellaneda-B. y Ordoñez-Túnel-Ricaldoni-26 Marzo. Instrucciones: 26 Marzo-L.A. de Herrera-R. Anador-Centenario." },
+    "329": { a: "Desvío R. Anador", d: "Pta Carretas: Gral Flores-Albo-Ricaldoni-26 Marzo. Aviación: 26 Marzo-L.A. de Herrera-R. Anador-Túnel-Garibaldi." },
+    "330": { a: "Uso de Túnel", d: "Ciudadela: Larrañaga-Avellaneda-B. y Ordoñez-Túnel-18 Julio-Colonia. Instrucciones: 8 Oct-Albo-Ricaldoni-Túnel-L.A. de Herrera-Larrañaga." },
+    "370": { a: "Uso de Túnel", d: "Portones: Agraciada-Br. Artigas-Millán-Av. Leyes-Túnel. Cerro: Túnel-Av. Leyes-Yatay-San Martín-Br. Artigas-Agraciada." },
+    "396": { a: "Afectación San Martín", d: "BPS: San Martín-I. de María-Gral Flores-Av. Leyes. Mendoza: Afectación en San Martín y L.A. de Herrera." },
+    "402": { a: "Tnal. Prov. Ciudadela Norte", d: "Ciudadela: Avellaneda-B. y Ordoñez-Túnel-Br. Artigas-M. Caseros-Yaguarón-Uruguay. P. Malvín: Mercedes-Av. Leyes-M. Caseros-Ricaldoni-Túnel-L.A. de Herrera-Larrañaga." },
+    "404": { a: "Desvío Palacio Luz", d: "P. Luz: 8 Oct-L.A. de Herrera-Br. Artigas-Gral Flores-Garibaldi-San Martín. Juana América: San Martín-Br. Artigas-L.A. de Herrera-8 Octubre." },
+    "405": { a: "Uso de Túnel", d: "Pque Rodó: Av. Italia (Túnel)-Ricaldoni-Llambí-26 Marzo. Mendoza: Afectación en 26 de Marzo y L.A. de Herrera." },
+    "407": { a: "Uso de Túnel", d: "Cruce de Av. Centenario por Túnel en ambos sentidos." },
+    "409": { a: "Tnal. Prov. Pza. España", d: "Pza. España: Agraciada-Br. Artigas-Millán-Av. Leyes-Soriano-Canelones. Saint Bois: F. Crespo-Av. Leyes-San Martín-Millán-Br. Artigas." },
+    "427": { a: "Desvío Av. Leyes", d: "Portones: Agraciada-Br. Artigas-Millán-Av. Leyes-Mercedes-Vazquez-Rodó. UAM: Guayabos-Minas-Colonia-Av. Leyes-San Martín-Millán-Agraciada." },
+    "456": { a: "Tnal. Prov. Palacio Luz", d: "P. Luz: San Martín-Vilardebó-Zapicán-Aguilar. Instrucciones: Aguilar-Melo-Santa Fe-Zapicán-Vilardebó." },
+    "494": { a: "Uso de Túnel", d: "Buceo: Agraciada-Br. Artigas-Millán-Av. Leyes-Mercedes-Túnel-L.A. de Herrera-R. Anador. Ruta 1: R. Anador-Túnel-Colonia-Av. Leyes-San Martín-Br. Artigas-Agraciada." },
+    "G": { a: "Desvío Av. Leyes", d: "Portones: Agraciada-Br. Artigas-Millán-Av. Leyes-Magallanes. La Paz: Av. Leyes-Yatay-San Martín-Millán-Br. Artigas-Agraciada." },
+    "505": { a: "Tnal. Prov. Ciudadela Norte", d: "Ciudadela: Gral Flores-Av. Leyes-Colonia-Rondeau. Andaluz: Mercedes a ruta habitual." },
+    "522": { a: "Tnal. Prov. Kibón", d: "Pocitos: Millán-San Martín-Av. Leyes-Magallanes-Soriano-A. Lanza-26 Marzo-Rbla Armenia. Sayago: L.A. de Herrera-26 Marzo-Maldonado-Constituyente-Colonia-Millán." },
+    "524": { a: "Tnal. Prov. Ciudadela Norte", d: "Malvín: Agraciada-Br. Artigas-Millán-Av. Leyes-Yaguarón-Colonia. Tres Ombúes: Mercedes-Av. Leyes-San Martín-Br. Artigas-Agraciada." },
+    "526": { a: "Cruce L.A. de Herrera", d: "Afectación y demora en Millán y Rivera en intersección con Luis A. de Herrera." },
+    "538": { a: "Tnal. Prov. Ciudadela Norte", d: "Pza. España: Millán-San Martín-Av. Leyes-Yaguarón. Buceo: Mercedes-Av. Leyes-San Martín-Millán-Larrañaga." },
+    "546": { a: "Uso de Túnel", d: "Portones: Castro-Millán-Garibaldi-Albo-Ricaldoni-Túnel-L.A. de Herrera-8 Oct. Belvedere: 8 Oct-B. y Ordoñez-Túnel-Albo-Garibaldi-Millán-Castro." },
+    "582": { a: "Desvío Av. Leyes", d: "Pta. Carretas: Millán-San Martín-Av. Leyes-Magallanes-Mercedes-Constituyente. Peñarol: Colonia-Av. Leyes-San Martín-Millán." },
+    "CE1": { a: "Desvío Soriano", d: "18 de Julio-Minas-Colonia-Soriano-G. Araújo-San José-Maldonado-Constituyente-18 de Julio." },
+    "sub_agraciada": { a: "Tnal. Prov. Rondeau", d: "Centro: Agraciada-Maturana-Br. Artigas-Millán-Av. Leyes-Magallanes-Tnal Rondeau. Oeste: Ejido-Av. Leyes-Yatay-San Martín-Br. Artigas-Agraciada." },
+    "sub_flores": { a: "Tnal. Prov. Rondeau", d: "Centro: Gral Flores-Av. Leyes-Magallanes-Tnal Rondeau. Manga/R6: Ejido-Av. Leyes-Gral Flores." },
+    "sub_italia": { a: "Tnal. Prov. Rondeau", d: "Al Este: Tnal Rondeau-Túnel Av. Italia-Vuelta por Túnel." },
+    "sub_ruta8": { a: "Tnal. Prov. Rondeau", d: "Hacia R8: Tnal Rondeau-Miguelete-Pte. Berro-Túnel-L.A. de Herrera-8 de Octubre." },
+    "inter_trescruces": { a: "Afectación Accesos", d: "Rutas 3 y 5: Demora en Br. Artigas y Suarez. Ruta 8: Túnel-L.A. de Herrera-8 Octubre (Entrada por B. y Ordoñez-Túnel)." }
+};
+
+function mostrar() {
+    const s = document.getElementById("lineaSelect").value;
+    const r = document.getElementById("resultado");
+    if(s) {
+        r.style.display = "block";
+        document.getElementById("alerta").innerHTML = "⚠️ " + data[s].a;
+        document.getElementById("detalle").innerHTML = "<b>Recorrido:</b><br>" + data[s].d;
+    } else { r.style.display = "none"; }
+}
+</script>
+</body>
+</html>
